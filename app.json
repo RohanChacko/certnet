@@ -1,0 +1,6 @@
+{
+	"name": "Certification Validation",
+	"description": "A blockchain verified certification service",
+	"repository": "https://github.com/Sumaid/certnet/",
+  "keywords": ["node", "express", "react", "ethereum"]
+}
