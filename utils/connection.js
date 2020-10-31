@@ -30,4 +30,11 @@ const connectWeb3 = function() {
     };
   }
 
+ process.env.NODE_ENV === "development" ? log.Print("Current host: " + self.web3.currentProvider.host) : log.Print("Current host: " + self.web3.currentProvider.engine._providers[2].provider.host);
+
+};
+
+const getAccounts = function() {
+  const self = this;
+  return self.web3.eth.getAccounts();
 };
