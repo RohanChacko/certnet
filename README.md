@@ -1,8 +1,10 @@
-# Educational History Using Blockchain
+# Educational History Using Blockchain : CertNet
 
-You can either set up local development environment or deploy on a test network like Rinkeby. 
+![usecase](./documents/usecase.png)
 
 ## Steps to set up local development environment
+
+You can either set up local development environment or deploy on a test network like Rinkeby. 
 
 ### Setting local database
 
