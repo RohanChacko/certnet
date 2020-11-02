@@ -95,7 +95,7 @@ npm start
 6. Go to http://localhost:3000/display/certificate/:id to display the certificate corresponding to id
 
 
-## Deploying Smart Contract on test network ( Not required for development )
+## Deploying Smart Contract on test network (Not required for development)
 
 The contract can be deployed in any test networks. We are using Rinkeby test network with help of truffle.
 
