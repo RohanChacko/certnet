@@ -81,3 +81,10 @@ const generateCertificate = function(
       });
   });
 };
+
+module.exports = {
+  connectWeb3,
+  getAccounts,
+  getCertificateData,
+  generateCertificate
+};
