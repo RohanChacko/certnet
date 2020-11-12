@@ -52,9 +52,12 @@ app.get("/certificate/verify/:id", (req, res) => {
     );
 });
 
-app.post("/certificate/generate", (req, res) => {
+app.post("/certificate/generate/:id", (req, res) => {
   const { candidateName, orgName, courseName, assignDate, duration } = req.body;
 
+  // Take from URL GET variable
+  const ownerID = req.params.id;
+  console.log(ownerID);
   const given = new Date(assignDate);
 
   let expirationDate = given.setFullYear(given.getFullYear() + duration);
@@ -62,6 +65,7 @@ app.post("/certificate/generate", (req, res) => {
   expirationDate = expirationDate.toString();
 
   const certificate = new Certificates({
+    ownerID,
     candidateName,
     orgName,
     courseName,

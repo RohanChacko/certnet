@@ -35,6 +35,7 @@ export const verifyCertificate = certificateId =>
     });
 
 export const generateCertificate = (
+  ownerId,
   candidateName,
   courseName,
   orgName,
@@ -42,7 +43,7 @@ export const generateCertificate = (
   duration,
   emailId
 ) =>
-  fetch(`${host}/certificate/generate`, {
+  fetch(`${host}/certificate/generate/${ownerId}`, {
     ...postHeader,
     body: JSON.stringify({
       candidateName,

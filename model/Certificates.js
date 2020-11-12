@@ -4,6 +4,10 @@ const truffle_connect = require("../utils/connection");
 truffle_connect.connectWeb3();
 
 const CertificateSchema = new mongoose.Schema({
+
+  ownerID: {
+    type: Number  
+  },
   candidateName: {
     type: String,
     required: true,
