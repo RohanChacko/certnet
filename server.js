@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 // CORS
 if (process.env.NODE_ENV !== "production") app.use(require("cors")());
 
+// Get Certificate based on certificate id
 app.get("/certificate/data/:id", (req, res) => {
   let certificateId = req.params.id;
   Certificates.findById(certificateId)
@@ -33,6 +34,18 @@ app.get("/certificate/data/:id", (req, res) => {
       if (obj === null)
         res.status(400).send({ err: "Certificate data doesn't exist" });
       else res.send(obj);
+    })
+    .catch(err => res.status(400).send({ err }));
+});
+
+// Get all Certificates based on user id
+app.get("/certificates/data/:id", (req, res) => {
+  let ownerId = req.params.id;
+  Certificates.find({'ownerID':ownerId})
+    .then(obj => {
+      if (obj === null)
+        res.status(400).send({ err: "Certificate data doesn't exist" });
+      else {console.log(obj);res.send(obj);}
     })
     .catch(err => res.status(400).send({ err }));
 });

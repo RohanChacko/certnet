@@ -6,7 +6,7 @@ truffle_connect.connectWeb3();
 const CertificateSchema = new mongoose.Schema({
 
   ownerID: {
-    type: Number  
+    type: String 
   },
   candidateName: {
     type: String,

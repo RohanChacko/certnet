@@ -112,7 +112,7 @@ class GenerateForm extends React.Component {
     } = this.state;
     let candidateName = `${firstname} ${lastname}`;
     let assignDate = new Date(assignedOn).getTime();
-    let ownerId = parseInt(this.props.match.params.id);
+    let ownerId = this.props.match.params.id;
     generateCertificate(
       ownerId,
       candidateName,
