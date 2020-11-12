@@ -6,6 +6,7 @@ import NavBar from "./Components/NavBar";
 import Homepage from "./Components/Homepage";
 import Dashboard from "./Components/Dashboard";
 import GenerateForm from './Components/GenerateForm';
+import { connect } from 'react-redux'
 
 class App extends Component {
   render() {
@@ -15,7 +16,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/login" component={SignIn} />
-          <Route path="/generate-certificate/:id" component={GenerateForm} />
+          <Route path="/generate-certificate" component={GenerateForm} />
           <Route path="/display/certificate/:id" component={Dashboard} />
         </Switch>
       </div>
@@ -23,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

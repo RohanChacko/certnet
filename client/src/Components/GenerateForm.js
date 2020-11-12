@@ -7,6 +7,25 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SubmitAnimation from "./SubmitAnimation";
 import { generateCertificate } from "../Utils/apiConnect";
+import { connect } from 'react-redux'
+
+// Map state to props
+function mapStateToProps(state) {
+  return {
+      user: state.user
+  }
+}
+// Map functions that use dispatch to props
+function mapDispatchToProps(dispatch) {
+  return {
+      logout: () => {
+          dispatch({ type: 'LOGOUT', payload: {} })
+      },
+      login: (user) => {
+        dispatch({ type: 'LOGIN', payload: user })
+    }
+  }
+}
 
 const styles = theme => ({
   container: {
@@ -77,6 +96,7 @@ const styles = theme => ({
 });
 
 class GenerateForm extends React.Component {
+
   state = {
     firstname: "",
     lastname: "",
@@ -86,7 +106,8 @@ class GenerateForm extends React.Component {
     assignedOn: null,
     duration: 0,
     currentState: "normal",
-    emailId: ""
+    emailId: "",
+    user: {}
   };
 
   handleChange = name => event => {
@@ -112,9 +133,8 @@ class GenerateForm extends React.Component {
     } = this.state;
     let candidateName = `${firstname} ${lastname}`;
     let assignDate = new Date(assignedOn).getTime();
-    let ownerId = this.props.match.params.id;
     generateCertificate(
-      ownerId,
+      this.props.user.id,
       candidateName,
       coursename,
       organization,
@@ -134,6 +154,7 @@ class GenerateForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log('USER in generate form is', this.state.user);
     const {
       firstname,
       lastname,
@@ -150,7 +171,7 @@ class GenerateForm extends React.Component {
         <Grid item xs={12} sm={8}>
           <Paper className={classes.paper}>
             <Typography variant="h3" color="inherit">
-              Certificate Generation Form
+            Certificate Generation Form
             </Typography>
             <form
               className={classes.container}
@@ -289,4 +310,4 @@ GenerateForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(GenerateForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(GenerateForm));
