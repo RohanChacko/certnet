@@ -24,8 +24,8 @@ Install MongoDB
 
    ```javascript
    db.createUser({
-     user: "<USERNAME OF YOUR CHOICE>",
-     pwd: "<PASSWORD OF YOUR CHOICE>",
+     user: "newuser",
+     pwd: "1234",
      roles: [{ role: "dbOwner", db: "certification" }]
    });
    ```
@@ -52,7 +52,7 @@ Install MongoDB
 4. To start the RPC server run the command
 
    ```bash
-   npm run ganache
+   npm run ganache &
    ```
 
 5. Deploy the smart contract to the local blockchain.
