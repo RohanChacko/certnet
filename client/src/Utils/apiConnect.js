@@ -24,6 +24,13 @@ export const getCertificate = certificateId =>
       console.log(err);
     });
 
+export const getCertificates = ownerId =>
+  fetch(`${host}/certificates/data/${ownerId}`, getHeader)
+    .then(res => res.json())
+    .catch(err => {
+      console.log(err);
+    });
+
 export const verifyCertificate = certificateId =>
   fetch(`${host}/certificate/verify/${certificateId}`, getHeader)
     .then(res => {
@@ -35,6 +42,7 @@ export const verifyCertificate = certificateId =>
     });
 
 export const generateCertificate = (
+  ownerId,
   candidateName,
   courseName,
   orgName,
@@ -42,7 +50,7 @@ export const generateCertificate = (
   duration,
   emailId
 ) =>
-  fetch(`${host}/certificate/generate`, {
+  fetch(`${host}/certificate/generate/${ownerId}`, {
     ...postHeader,
     body: JSON.stringify({
       candidateName,
