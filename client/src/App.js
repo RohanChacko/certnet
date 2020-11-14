@@ -7,7 +7,6 @@ import Homepage from "./Components/Homepage";
 import Dashboard from "./Components/Dashboard";
 import GenerateForm from './Components/GenerateForm';
 import CertificatesList from './Components/CertificatesList';
-import { connect } from 'react-redux'
 
 class App extends Component {
   render() {

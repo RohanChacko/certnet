@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { getCertificates } from "../Utils/apiConnect";
 import { connect } from 'react-redux'
-import withStyles from "@material-ui/core/styles/withStyles";
 
 // Map state to props
 function mapStateToProps(state) {
@@ -44,7 +42,7 @@ class CertificatesList extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (state.user != props.user){
+    if (state.user !== props.user){
       const ownerId = props.user.id;
       getCertificates(ownerId).then(data => {
         return { data: data, user:props.user };
