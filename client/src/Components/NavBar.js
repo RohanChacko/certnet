@@ -12,6 +12,25 @@ import HomeIcon from "@material-ui/icons/Home";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Link from "react-router-dom/Link";
+import { connect } from 'react-redux'
+
+// Map state to props
+function mapStateToProps(state) {
+  return {
+      user: state.user
+  }
+}
+// Map functions that use dispatch to props
+function mapDispatchToProps(dispatch) {
+  return {
+      logout: () => {
+          dispatch({ type: 'LOGOUT', payload: {} })
+      },
+      login: (user) => {
+        dispatch({ type: 'LOGIN', payload: user })
+    }
+  }
+}
 
 const styles = theme => ({
   root: {
@@ -111,7 +130,7 @@ class NavBar extends React.Component {
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+    const id = this.props.user.id;
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -120,6 +139,9 @@ class NavBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        <MenuItem component={Link} to={`/profile/${id}`}>
+          Profile
+        </MenuItem>
         <MenuItem component={Link} to="/login">
           Authentication
         </MenuItem>
@@ -203,4 +225,4 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NavBar));
