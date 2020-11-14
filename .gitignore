@@ -2,3 +2,4 @@ node_modules
 ./client/build
 build
 .DS_Store
+demo.mov
