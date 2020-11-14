@@ -91,6 +91,8 @@ class Dashboard extends React.Component {
     getCertificate(certificateId).then(data => {
       const {
         candidateName,
+        // ownerId,
+        // studentId,
         orgName,
         courseName,
         assignDate,
@@ -124,6 +126,8 @@ class Dashboard extends React.Component {
     } = this.state;
     const {
       candidateName,
+      ownerId,
+      studentId,
       orgName,
       courseName,
       assignDate,
@@ -154,13 +158,13 @@ class Dashboard extends React.Component {
             <Paper className={classes.rightpaper}>
               <div>
                 <Typography variant="h5" color="inherit" noWrap>
-                  {candidateName}
+                  <a href={`/profile/${studentId}`}>{candidateName}</a>
                 </Typography>
                 <Typography variant="h6" color="inherit" noWrap>
                   {courseName}
                 </Typography>
                 <Typography variant="h6" color="inherit" noWrap>
-                  {orgName}
+                <a href={`/profile/${ownerId}`}>{orgName}</a>
                 </Typography>
                 <Typography variant="caption" color="inherit" noWrap>
                   Assigned on: {assignDate}

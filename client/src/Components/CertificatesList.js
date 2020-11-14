@@ -4,6 +4,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+// import { getCertificates,getStudentCertificates } from "../Utils/apiConnect";
 import { getCertificates } from "../Utils/apiConnect";
 import { connect } from 'react-redux'
 
@@ -35,10 +36,17 @@ class CertificatesList extends React.Component {
   componentDidMount() {
     const ownerId = this.props.user.id;
     this.setState({user: this.props.user});
-    getCertificates(ownerId).then(data => {
-      this.setState({ data: data });
-      console.log('DATA recieved is ', data);
-    });
+    if (this.props.user.type == 'Org') {
+      getCertificates(ownerId).then(data => {
+        this.setState({ data: data });
+        console.log('DATA recieved is ', data);
+      });  
+    } else {
+      // getStudentCertificates(ownerId).then(data => {
+      //   this.setState({ data: data });
+      //   console.log('DATA recieved is ', data);
+      // }); 
+    }
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -73,7 +81,7 @@ class CertificatesList extends React.Component {
 
     return (
       <div>
-        <h1>List of Certificates</h1>
+        <Typography variant="h4" color="inherit" noWrap>List of Certificates</Typography>
         {this.state.data !== undefined && this.state.data.map((val, idx) => (
           <div>
               <Card className={styles.root} variant="outlined">

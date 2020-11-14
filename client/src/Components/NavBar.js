@@ -146,11 +146,11 @@ class NavBar extends React.Component {
           Authentication
         </MenuItem>
         <MenuItem component={Link} to="/display_certificates">
-          Dashboard
+          View Certificates
         </MenuItem>
-        <MenuItem component={Link} to="/generate-certificate">
+        {this.props.user.type === 'Org' && <MenuItem component={Link} to="/generate-certificate">
           Generate Certificate
-        </MenuItem>
+        </MenuItem>}
       </Menu>
     );
 

@@ -7,6 +7,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SubmitAnimation from "./SubmitAnimation";
 import { generateCertificate } from "../Utils/apiConnect";
+// import { generateCertificate, getStudents } from "../Utils/apiConnect";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import { connect } from 'react-redux'
 
 // Map state to props
@@ -35,6 +41,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    [theme.breakpoints.up("sm")]: { width: 250 },
+    [theme.breakpoints.down("sm")]: { width: 200 }
+  },
+  dropdown: {
+    marginLeft: theme.spacing.unit*15,
+    marginRight: theme.spacing.unit*15,
     [theme.breakpoints.up("sm")]: { width: 250 },
     [theme.breakpoints.down("sm")]: { width: 200 }
   },
@@ -107,8 +119,17 @@ class GenerateForm extends React.Component {
     duration: 0,
     currentState: "normal",
     emailId: "",
-    user: {}
+    user: {},
+    student: {},
+    students: [{name: 'Sumaid'}, {name: 'Rohan'}]
   };
+
+  componentDidMount() {
+    // getStudents().then(data => {
+    //   this.setState({students: data})
+    //   console.log('Students recieved is ', data);
+    // });  
+  }
 
   handleChange = name => event => {
     this.setState({
@@ -123,24 +144,24 @@ class GenerateForm extends React.Component {
     }
     this.setState({ currentState: "load" });
     const {
-      firstname,
-      lastname,
+      student,
       organization,
       coursename,
       assignedOn,
       duration,
       emailId
     } = this.state;
-    let candidateName = `${firstname} ${lastname}`;
+    let candidateName = `${student.givenName} ${student.familyName}`;
     let assignDate = new Date(assignedOn).getTime();
     generateCertificate(
       this.props.user.id,
+      student.id,
       candidateName,
       coursename,
       organization,
       assignDate,
       parseInt(duration),
-      emailId
+      student.email
     )
       .then(data => {
         if (data.data !== undefined)
@@ -151,6 +172,10 @@ class GenerateForm extends React.Component {
       })
       .catch(err => console.log(err));
   };
+
+  changeStudent = (event) => {
+      this.setState({student: event.target.value});
+  }
 
   render() {
     const { classes } = this.props;
@@ -178,27 +203,22 @@ class GenerateForm extends React.Component {
               autoComplete="off"
               onSubmit={this.submitData}
             >
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="firstname"
-                  label="First Name"
-                  className={classes.textField}
-                  value={firstname}
-                  onChange={this.handleChange("firstname")}
-                  margin="normal"
-                  variant="outlined"
-                />
-                <TextField
-                  required
-                  id="lastname"
-                  label="Last Name"
-                  className={classes.textField}
-                  value={lastname}
-                  onChange={this.handleChange("lastname")}
-                  margin="normal"
-                  variant="outlined"
-                />
+              <Grid item xs={16} m={16}>
+                <br/>
+                <FormControl className={(classes.dropdown)}>
+                  <InputLabel id="demo-simple-select-helper-label">Student</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    value={this.state.student}
+                    onChange={this.changeStudent}
+                  >
+                    {this.state.students.map((stud, index) =>
+            <MenuItem key={stud.name} value={stud}>{stud.name}</MenuItem>
+          )}
+                  </Select>
+                  <FormHelperText>Select student to certify</FormHelperText>
+                </FormControl>
               </Grid>
               <Grid item xs={12} sm={12}>
                 <TextField
@@ -254,21 +274,6 @@ class GenerateForm extends React.Component {
                   }}
                   margin="normal"
                   variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  required
-                  id="email"
-                  label="Email"
-                  className={classes.textField}
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  margin="normal"
-                  variant="outlined"
-                  value={emailId}
-                  onChange={this.handleChange("emailId")}
                 />
               </Grid>
               <Grid item xs={12} sm={12}>

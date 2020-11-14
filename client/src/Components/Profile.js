@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from 'react-redux'
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
     root: {
@@ -68,9 +69,9 @@ class Profile extends React.Component {
         const user = this.state.user;
         return (
             <div >
-                <div className={classes.head}>
-                    <h2>Profile Page</h2>
-                </div>
+                <br/>
+                <Typography variant="h4" color="inherit" className={classes.head} noWrap>Profile Page</Typography>
+                <br/>
                 {user.imageUrl && <Grid container justify="center" spacing={8}>
                     <Grid item >
                         <img alt="complex" src={user.imageUrl} />
