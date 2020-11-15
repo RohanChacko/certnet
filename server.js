@@ -130,9 +130,9 @@ app.post("/certificate/generate/:ownerid&:studentid", (req, res) => {
   // Parse GET parameters
   const ownerID = req.params.ownerid;
   const studentID = req.params.studentid;
-  const given = new Date(parseInt(assignDate));
+  const given = new Date(assignDate);
 
-  let expirationDate = given.setFullYear(given.getFullYear() + parseInt(duration));
+  let expirationDate = given.setFullYear(given.getFullYear() + duration);
 
   expirationDate = expirationDate.toString();
 
