@@ -81,22 +81,25 @@ function mapDispatchToProps(dispatch) {
 class CertificatesList extends React.Component {
 
   state = {
-    data: [{ candidateName: "Sumaid Syed", certificateId: "12312a", orgName: "GNOME", courseName: "GSoC" },
-    { candidateName: "Rohan Chako", certificateId: "12312a", orgName: "IIITH", courseName: "MS" }],
+    // data: [{ candidateName: "Sumaid Syed", certificateId: "12312a", orgName: "GNOME", courseName: "GSoC" },
+    // { candidateName: "Rohan Chako", certificateId: "12312a", orgName: "IIITH", courseName: "MS" }],
+    data: [],
     user: {}
   }
 
   componentDidMount() {
-    const ownerId = this.props.user.id;
+    const ownerId = this.props.user.id || this.props.user.userId;
+    console.log('User in view certificates is ', this.props);
     this.setState({ user: this.props.user });
     if (this.props.user.type == 'Org') {
-      getCertificates(ownerId, null).then(data => {
+      getCertificates(ownerId, "None").then(data => {
         this.setState({ data: data });
         console.log('DATA recieved is ', data);
       });
     } else {
-      getCertificates(null, ownerId).then(data => {
+      getCertificates("None", ownerId).then(data => {
         this.setState({ data: data });
+        console.log('owner id is', ownerId);
         console.log('DATA recieved is ', data);
       });
     }

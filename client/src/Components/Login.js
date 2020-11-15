@@ -95,13 +95,13 @@ function Login(props) {
 
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
-    getUser(res.profileObj.id).then(data => {
-      if (data.id != undefined) {
+    getUser(res.profileObj.googleId).then(data => {
+      if (data !== {}) {
         toggleStatus(true);
+        setOpen(false);
         updateUser(data);
         props.login(data);
       } else {
-        // set type
         updateUser(res.profileObj);
         setOpen(true);
       }
@@ -112,7 +112,7 @@ function Login(props) {
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
     alert(
-      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
+      `Failed to login`
     );
   };
 
@@ -125,6 +125,7 @@ function Login(props) {
     setOpen(false);
     const newuser = user;
     newuser.type = value;
+    newuser.id = newuser.googleId;
     toggleStatus(true);
     updateUser(newuser);
     props.login(newuser);

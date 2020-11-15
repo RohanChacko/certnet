@@ -62,11 +62,13 @@ class Profile extends React.Component {
     componentDidMount() {
         const { match: { params } } = this.props;
         const userId = params.userId;
+        var user = {};
         getUser(userId).then(data => {
-            this.setState({ user: data });
-            console.log('User recieved from ID is ', data);
+            user = data[0];
+            user.id = user.userId;
+            this.setState({ user: user });
+            console.log('User recieved from ID is ', user);
         });
-        // this.setState({ user: this.props.user })
     }
 
     render() {
@@ -89,7 +91,7 @@ class Profile extends React.Component {
                                 Name
                         </Typography>
                             <Typography variant="body2" component="p" className={classes.head}>
-                                Sumaid Sd
+                                {user.name}
                         </Typography>
                         </Paper>
                     </Grid>
@@ -99,7 +101,7 @@ class Profile extends React.Component {
                                 Given Name
                         </Typography>
                             <Typography variant="body2" component="p" className={classes.head}>
-                                Sumaid
+                                {user.givenName}
                         </Typography>
                         </Paper>
                     </Grid>}
@@ -109,7 +111,7 @@ class Profile extends React.Component {
                                 Family Name
                         </Typography>
                             <Typography variant="body2" component="p" className={classes.head}>
-                                Sd
+                            {user.familyName}
                         </Typography>
                         </Paper>
                     </Grid>}
@@ -121,7 +123,7 @@ class Profile extends React.Component {
                                 Email
                         </Typography>
                             <Typography variant="body2" component="p" className={classes.head}>
-                                sumaidsyed@gmail.com
+                            {user.email}
                         </Typography>
                         </Paper>
                     </Grid>
@@ -131,7 +133,7 @@ class Profile extends React.Component {
                                 Type
                         </Typography>
                             <Typography variant="body2" component="p" className={classes.head}>
-                                Student
+                                {user.type}
                         </Typography>
                         </Paper>
                     </Grid>
