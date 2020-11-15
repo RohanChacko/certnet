@@ -4,7 +4,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import { getCertificates,getStudentCertificates } from "../Utils/apiConnect";
 import { getCertificates } from "../Utils/apiConnect";
 import { connect } from 'react-redux'
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -91,24 +90,30 @@ class CertificatesList extends React.Component {
     const ownerId = this.props.user.id;
     this.setState({ user: this.props.user });
     if (this.props.user.type == 'Org') {
-      getCertificates(ownerId).then(data => {
+      getCertificates(ownerId, null).then(data => {
         this.setState({ data: data });
         console.log('DATA recieved is ', data);
       });
     } else {
-      // getStudentCertificates(ownerId).then(data => {
-      //   this.setState({ data: data });
-      //   console.log('DATA recieved is ', data);
-      // }); 
+      getCertificates(null, ownerId).then(data => {
+        this.setState({ data: data });
+        console.log('DATA recieved is ', data);
+      });
     }
   }
 
   static getDerivedStateFromProps(props, state) {
     if (state.user !== props.user) {
       const ownerId = props.user.id;
-      getCertificates(ownerId).then(data => {
-        return { data: data, user: props.user };
-      });
+      if (props.user.type == 'Org'){
+        getCertificates(ownerId, null).then(data => {
+          return { data: data, user: props.user };
+        });  
+      } else {
+        getCertificates(null, ownerId).then(data => {
+          return { data: data, user: props.user };
+        });  
+      }
     }
   }
 

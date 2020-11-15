@@ -121,14 +121,14 @@ class GenerateForm extends React.Component {
     emailId: "",
     user: {},
     student: {},
-    students: [{name: 'Sumaid'}, {name: 'Rohan'}]
+    students: []
   };
 
   componentDidMount() {
-    // getStudents().then(data => {
-    //   this.setState({students: data})
-    //   console.log('Students recieved is ', data);
-    // });  
+    getStudents().then(data => {
+      this.setState({students: data})
+      console.log('Students recieved is ', data);
+    });  
   }
 
   handleChange = name => event => {
@@ -181,14 +181,12 @@ class GenerateForm extends React.Component {
     const { classes } = this.props;
     console.log('USER in generate form is', this.state.user);
     const {
-      firstname,
-      lastname,
       organization,
       coursename,
       duration,
       currentState,
       orgLogo,
-      emailId,
+      student,
       certificateId
     } = this.state;
     return (

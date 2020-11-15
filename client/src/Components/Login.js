@@ -19,7 +19,7 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
-// import { getUser, postUser } from "../Utils/apiConnect";
+import { getUser, generateUser } from "../Utils/apiConnect";
 
 // Map state to props
 function mapStateToProps(state) {
@@ -78,14 +78,14 @@ function mapStateToProps(state) {
 const clientId =
   '707788443358-u05p46nssla3l8tmn58tpo9r5sommgks.apps.googleusercontent.com';
 
-function getUserObj(userId) {
-  // getUser(userId).then(data => {
-  //   return data;
-  // })
-  // return {};
-  return {};
-  // return {id:'123',name:'First Don', givenName:'First', familyName:'Don', email:'damn@damn.com', type:'Org', imageUrl:'https://static.toiimg.com/thumb/msid-69914063,imgsize-119993,width-800,height-600,resizemode-75/69914063.jpg'};
-}
+// function getUserObj(userId) {
+//   // getUser(userId).then(data => {
+//   //   return data;
+//   // })
+//   // return {};
+//   return {};
+//   // return {id:'123',name:'First Don', givenName:'First', familyName:'Don', email:'damn@damn.com', type:'Org', imageUrl:'https://static.toiimg.com/thumb/msid-69914063,imgsize-119993,width-800,height-600,resizemode-75/69914063.jpg'};
+// }
 
 function Login(props) {
    const [loggedIn, toggleStatus] = useState(false);
@@ -95,16 +95,17 @@ function Login(props) {
 
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
-    const data = getUserObj(res.profileObj.id);
-    if (data.id != undefined) {
-      toggleStatus(true);
-      updateUser(data);
-      props.login(data);
-    } else {
-      // set type
-      updateUser(res.profileObj);
-      setOpen(true);
-    }
+    getUser(res.profileObj.id).then(data => {
+      if (data.id != undefined) {
+        toggleStatus(true);
+        updateUser(data);
+        props.login(data);
+      } else {
+        // set type
+        updateUser(res.profileObj);
+        setOpen(true);
+      }
+    })
     refreshTokenSetup(res);
   };
 
@@ -127,9 +128,9 @@ function Login(props) {
     toggleStatus(true);
     updateUser(newuser);
     props.login(newuser);
-    // postUser(user).then(res => {
-    //   console.log('post request response is', res);
-    // })
+    generateUser(user.id, user.name,user.givenName,user.familyName,user.imageUrl,user.email,user.type).then(res => {
+      console.log('post request response is', res);
+    })
   };
 
   return (

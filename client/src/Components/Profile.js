@@ -1,5 +1,5 @@
 import React from "react";
-// import { getUser } from "../Utils/apiConnect";
+import { getUser } from "../Utils/apiConnect";
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -55,21 +55,18 @@ function mapDispatchToProps(dispatch) {
 
 class Profile extends React.Component {
 
-    // const { match: { params } } = this.props;
-
     state = {
         user: {}
     }
 
     componentDidMount() {
-        // const { match: { params } } = this.props;
-        // const userId = params.userId;
-        // getUser(userId).then(data => {
-        //     this.setState({ user: data });
-        //     console.log('User recieved from ID is ', data);
-        // });
-        // TODO: when backend getUser is implemented, uncomment above part
-        this.setState({ user: this.props.user })
+        const { match: { params } } = this.props;
+        const userId = params.userId;
+        getUser(userId).then(data => {
+            this.setState({ user: data });
+            console.log('User recieved from ID is ', data);
+        });
+        // this.setState({ user: this.props.user })
     }
 
     render() {

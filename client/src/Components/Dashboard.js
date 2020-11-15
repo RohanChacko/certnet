@@ -94,8 +94,8 @@ class Dashboard extends React.Component {
     getCertificate(certificateId).then(data => {
       const {
         candidateName,
-        // ownerId,
-        // studentId,
+        ownerId,
+        studentId,
         orgName,
         courseName,
         assignDate,
@@ -107,6 +107,8 @@ class Dashboard extends React.Component {
         temp.pageLoad = false;
         temp.info = {
           candidateName,
+          ownerId,
+          studentId,
           orgName,
           courseName,
           assignDate: new Date(assignDate).toString().slice(4, 15),

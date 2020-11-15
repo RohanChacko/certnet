@@ -38,6 +38,7 @@ export const generateUser = (
   email,
   type
 ) =>
+
   fetch(`${host}/user/generate`, {
     ...postHeader,
     body: JSON.stringify({
