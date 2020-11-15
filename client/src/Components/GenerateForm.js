@@ -125,8 +125,8 @@ class GenerateForm extends React.Component {
 
   componentDidMount() {
     getStudents().then(data => {
-      this.setState({students: data})
       console.log('Students recieved is ', data);
+      this.setState({students: data})
     });  
   }
 

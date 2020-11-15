@@ -88,7 +88,7 @@ class CertificatesList extends React.Component {
   }
 
   componentDidMount() {
-    const ownerId = this.props.user.id || this.props.user.userId;
+    const ownerId = this.props.user.id;
     console.log('User in view certificates is ', this.props);
     this.setState({ user: this.props.user });
     if (this.props.user.type == 'Org') {
