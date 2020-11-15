@@ -128,6 +128,8 @@ class GenerateForm extends React.Component {
       console.log('Students recieved is ', data);
       this.setState({ students: data });
     });
+    console.log('User is ', this.props.user);
+    this.setState({organization: this.props.user.name, orgLogo: this.props.user.imageUrl});
   }
 
   handleChange = name => event => {
@@ -223,7 +225,7 @@ class GenerateForm extends React.Component {
                   id="organization"
                   label="Organization"
                   className={classes.textField}
-                  defaultValue={organization}
+                  defaultValue={this.props.user.name}
                   margin="normal"
                   variant="outlined"
                   InputProps={{

@@ -10,7 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Tooltip from "@material-ui/core/Tooltip";
 import HelpIcon from "@material-ui/icons/Help";
 import LockIcon from "@material-ui/icons/Lock";
-import { getCertificate, verifyCertificate } from "../Utils/apiConnect";
+import { getCertificate, verifyCertificate, getUser } from "../Utils/apiConnect";
 import Loader from "./Loader";
 import Certificate from "./Certificate";
 import PersonIcon from '@material-ui/icons/Person';
@@ -78,7 +78,8 @@ class Dashboard extends React.Component {
       orgName: "",
       courseName: "",
       assignDate: null,
-      expirationDate: null
+      expirationDate: null,
+      imageUrl: ""
     },
     logo:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/FOSSASIA_Logo.svg/600px-FOSSASIA_Logo.svg.png"
@@ -104,21 +105,28 @@ class Dashboard extends React.Component {
         assignDate,
         expirationDate
       } = data;
-      this.setState(prev => {
-        const temp = prev;
-        temp.certificateId = certificateId;
-        temp.pageLoad = false;
-        temp.info = {
-          candidateName,
-          ownerID,
-          studentID,
-          orgName,
-          courseName,
-          assignDate: new Date(assignDate).toString().slice(4, 15),
-          expirationDate: new Date(expirationDate).toString().slice(4, 15)
-        };
-        return temp;
-      });
+      getUser(ownerID).then(ownerData => {
+        const url = ownerData[0].imageUrl;
+        console.log('OWNER url is ', url);
+        this.setState(prev => {
+          console.log('url iss ', url);
+          const temp = prev;
+          temp.certificateId = certificateId;
+          temp.pageLoad = false;
+          temp.logo = url
+          temp.info = {
+            candidateName,
+            ownerID,
+            studentID,
+            orgName,
+            courseName,
+            assignDate: new Date(assignDate).toString().slice(4, 15),
+            expirationDate: new Date(expirationDate).toString().slice(4, 15),
+            url
+          };
+          return temp;
+        });
+      })
     });
   }
 
@@ -136,11 +144,13 @@ class Dashboard extends React.Component {
       candidateName,
       ownerID,
       studentID,
-    orgName,
+      orgName,
       courseName,
       assignDate,
-      expirationDate
+      expirationDate,
+      imageUrl
     } = this.state.info;
+    console.log('IMAGE url is', imageUrl);
     const tooltipInfo = `This verifies whether the certification is secured and stored with correct information in the blockchain`;
     return (
       <Grid container className={classes.root}>
@@ -155,6 +165,7 @@ class Dashboard extends React.Component {
                   date={assignDate}
                   hash={certificateId}
                   logo={logo}
+                  url={imageUrl}
                 />
               )}
           </Paper>
