@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== "production") app.use(require("cors")());
 // Get User object given user id
 app.get("/user/data/:id", (req, res) => {
   let studentId = req.params.id;
-  Users.findById(studentId)
+  Users.find({'userId': studentId})
     .then(obj => {
       if (obj === null)
         res.status(400).send({ err: "User data doesn't exist" });
@@ -51,10 +51,12 @@ app.get("/users/data/students", (req, res) => {
 });
 
 // Generate User
-app.post("/user/generate", (req, res) => {
+app.post("/user/generate/:id", (req, res) => {
   const { name, givenName, familyName, imageUrl, email , type } = req.body;
+  let userId = req.params.id;
 
   const user = new Users({
+    userId,
     name,
     givenName,
     familyName,
