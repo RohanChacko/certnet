@@ -16,6 +16,14 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
     },
+    indicator: {
+        color: theme.palette.text.secondary,
+        fontSize: 12
+    },
+    namebox: {
+        width: "200px",
+        height: "50px"
+    },
     paper: {
         textAlign: 'center',
         color: theme.palette.text.secondary,
@@ -32,18 +40,18 @@ function mapStateToProps(state) {
     return {
         user: state.user
     }
-  }
-  // Map functions that use dispatch to props
-  function mapDispatchToProps(dispatch) {
+}
+// Map functions that use dispatch to props
+function mapDispatchToProps(dispatch) {
     return {
         logout: () => {
             dispatch({ type: 'LOGOUT', payload: {} })
         },
         login: (user) => {
-          dispatch({ type: 'LOGIN', payload: user })
-      }
+            dispatch({ type: 'LOGIN', payload: user })
+        }
     }
-  }
+}
 
 class Profile extends React.Component {
 
@@ -61,7 +69,7 @@ class Profile extends React.Component {
         //     console.log('User recieved from ID is ', data);
         // });
         // TODO: when backend getUser is implemented, uncomment above part
-        this.setState({user: this.props.user})
+        this.setState({ user: this.props.user })
     }
 
     render() {
@@ -69,64 +77,66 @@ class Profile extends React.Component {
         const user = this.state.user;
         return (
             <div >
-                <br/>
+                <br />
                 <Typography variant="h4" color="inherit" className={classes.head} noWrap>Profile Page</Typography>
-                <br/>
+                <br />
                 {user.imageUrl && <Grid container justify="center" spacing={8}>
                     <Grid item >
                         <img alt="complex" src={user.imageUrl} />
                     </Grid>
                 </Grid>}
                 <Grid container justify="center" spacing={8}>
-                    <Grid item >
-                        <Paper>                <TextField
-                            id="name-readme"
-                            label="Name"
-                            value={user.name}
-                            defaultValue="Name"
-                            InputProps={{
-                                readOnly: true,
-                                disableUnderline: true,
-                            }}
-                        />        </Paper>
+                    <Grid item>
+                        <Paper className={classes.namebox}>
+                            <Typography variant="body2" component="p" className={classes.indicator}>
+                                Name
+                        </Typography>
+                            <Typography variant="body2" component="p" className={classes.head}>
+                                Sumaid Sd
+                        </Typography>
+                        </Paper>
                     </Grid>
-                    <Grid item >
-                        <Paper>                                <TextField
-                            id="givenName"
-                            label="Given Name"
-                            value={user.givenName}
-                            defaultValue="Given Name"
-                            InputProps={{
-                                readOnly: true,
-                                disableUnderline: true,
-                            }}
-                        />    </Paper>
-                    </Grid>
-                    <Grid item >
-                        <Paper>                <TextField
-                            id="familyName"
-                            label="Family Name"
-                            value={user.familyName}
-                            defaultValue="Family Name"
-                            InputProps={{
-                                readOnly: true,
-                                disableUnderline: true,
-                            }}
-                        /></Paper>
-                    </Grid>
+                    {user.type === 'Student' && <Grid item >
+                        <Paper className={classes.namebox}>
+                            <Typography variant="body2" component="p" className={classes.indicator}>
+                                Given Name
+                        </Typography>
+                            <Typography variant="body2" component="p" className={classes.head}>
+                                Sumaid
+                        </Typography>
+                        </Paper>
+                    </Grid>}
+                    {user.type === 'Student' && <Grid item >
+                        <Paper className={classes.namebox}>
+                            <Typography variant="body2" component="p" className={classes.indicator}>
+                                Family Name
+                        </Typography>
+                            <Typography variant="body2" component="p" className={classes.head}>
+                                Sd
+                        </Typography>
+                        </Paper>
+                    </Grid>}
                 </Grid>
                 <Grid container justify="center" spacing={8}>
-                <Grid item xs={2}>
-                        <Paper>                <TextField
-                            id="emaild-readme"
-                            label="Email"
-                            value={user.email}
-                            defaultValue="Email"
-                            InputProps={{
-                                readOnly: true,
-                                disableUnderline: true,
-                            }}
-                        />        </Paper>
+                    <Grid item>
+                        <Paper className={classes.namebox}>
+                            <Typography variant="body2" component="p" className={classes.indicator}>
+                                Email
+                        </Typography>
+                            <Typography variant="body2" component="p" className={classes.head}>
+                                sumaidsyed@gmail.com
+                        </Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item>
+                        <Paper className={classes.namebox}>
+                            <Typography variant="body2" component="p" className={classes.indicator}>
+                                Type
+                        </Typography>
+                            <Typography variant="body2" component="p" className={classes.head}>
+                                Student
+                        </Typography>
+                        </Paper>
                     </Grid>
                 </Grid>
 

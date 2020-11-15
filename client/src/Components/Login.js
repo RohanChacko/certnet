@@ -84,7 +84,7 @@ function getUserObj(userId) {
   // })
   // return {};
   return {};
-  return {id:'123',name:'First Don', givenName:'First', familyName:'Don', email:'damn@damn.com', type:'Student'};
+  // return {id:'123',name:'First Don', givenName:'First', familyName:'Don', email:'damn@damn.com', type:'Org', imageUrl:'https://static.toiimg.com/thumb/msid-69914063,imgsize-119993,width-800,height-600,resizemode-75/69914063.jpg'};
 }
 
 function Login(props) {

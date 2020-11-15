@@ -13,6 +13,9 @@ import LockIcon from "@material-ui/icons/Lock";
 import { getCertificate, verifyCertificate } from "../Utils/apiConnect";
 import Loader from "./Loader";
 import Certificate from "./Certificate";
+import PersonIcon from '@material-ui/icons/Person';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+
 
 const styles = theme => ({
   root: {
@@ -141,105 +144,105 @@ class Dashboard extends React.Component {
             {pageLoad ? (
               <Loader SIZE={170} />
             ) : (
-              <Certificate
-                name={candidateName}
-                title={courseName}
-                date={assignDate}
-                hash={certificateId}
-                logo={logo}
-              />
-            )}
+                <Certificate
+                  name={candidateName}
+                  title={courseName}
+                  date={assignDate}
+                  hash={certificateId}
+                  logo={logo}
+                />
+              )}
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
           {pageLoad ? (
             <Loader SIZE={70} />
           ) : (
-            <Paper className={classes.rightpaper}>
-              <div>
-                <Typography variant="h5" color="inherit" noWrap>
-                  <a href={`/profile/${studentId}`}>{candidateName}</a>
-                </Typography>
-                <Typography variant="h6" color="inherit" noWrap>
-                  {courseName}
-                </Typography>
-                <Typography variant="h6" color="inherit" noWrap>
-                <a href={`/profile/${ownerId}`}>{orgName}</a>
-                </Typography>
-                <Typography variant="caption" color="inherit" noWrap>
-                  Assigned on: {assignDate}
-                </Typography>
-                <Typography variant="caption" color="inherit" noWrap>
-                  Expires on: {expirationDate}
-                </Typography>
-              </div>
-              <Grid container className={classes.verificationBox}>
-                {!verified ? (
-                  <div>
-                    {!loading ? (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center"
-                        }}
-                      >
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
+              <Paper className={classes.rightpaper}>
+                <div>
+                  <Typography variant="h5" color="inherit" noWrap>
+                    <PersonIcon /><a href={`/profile/${studentId}`}>{candidateName}</a>
+                  </Typography>
+                  <Typography variant="h6" color="inherit" noWrap>
+                    {courseName}
+                  </Typography>
+                  <Typography variant="h6" color="inherit" noWrap>
+                    <AccountBalanceIcon /><a href={`/profile/${ownerId}`}>{orgName}</a>
+                  </Typography>
+                  <Typography variant="caption" color="inherit" noWrap>
+                    Assigned on: {assignDate}
+                  </Typography>
+                  <Typography variant="caption" color="inherit" noWrap>
+                    Expires on: {expirationDate}
+                  </Typography>
+                </div>
+                <Grid container className={classes.verificationBox}>
+                  {!verified ? (
+                    <div>
+                      {!loading ? (
+                        <div
                           style={{
-                            width: "150px",
-                            marginRight: "10px"
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center"
                           }}
-                          onClick={this.verification}
                         >
-                          <LockIcon
-                            style={{ marginLeft: "-15px", marginRight: "5px" }}
-                            fontSize="small"
-                            className={classes.leftIcon}
-                          />
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            style={{
+                              width: "150px",
+                              marginRight: "10px"
+                            }}
+                            onClick={this.verification}
+                          >
+                            <LockIcon
+                              style={{ marginLeft: "-15px", marginRight: "5px" }}
+                              fontSize="small"
+                              className={classes.leftIcon}
+                            />
                           Verify
                         </Button>
-                        <Tooltip title={tooltipInfo}>
-                          <HelpIcon style={{ fontSize: "1rem" }} />
-                        </Tooltip>
-                      </div>
-                    ) : (
-                      <CircularProgress
-                        className={classes.progress}
-                        color="secondary"
-                      />
-                    )}
-                  </div>
-                ) : (
-                  <Grid item sm={12}>
-                    {authorized ? (
-                      <div>
-                        <VerifyBadge />
-                        <Typography
-                          variant="subtitle1"
-                          className={classes.textitems}
-                        >
-                          This certificate is Blockchain Verified
+                          <Tooltip title={tooltipInfo}>
+                            <HelpIcon style={{ fontSize: "1rem" }} />
+                          </Tooltip>
+                        </div>
+                      ) : (
+                          <CircularProgress
+                            className={classes.progress}
+                            color="secondary"
+                          />
+                        )}
+                    </div>
+                  ) : (
+                      <Grid item sm={12}>
+                        {authorized ? (
+                          <div>
+                            <VerifyBadge />
+                            <Typography
+                              variant="subtitle1"
+                              className={classes.textitems}
+                            >
+                              This certificate is Blockchain Verified
                         </Typography>
-                      </div>
-                    ) : (
-                      <div>
-                        <FailureBadge />
-                        <Typography
-                          variant="subtitle1"
-                          className={classes.textitems}
-                        >
-                          There were some changes in the Certificate data
+                          </div>
+                        ) : (
+                            <div>
+                              <FailureBadge />
+                              <Typography
+                                variant="subtitle1"
+                                className={classes.textitems}
+                              >
+                                There were some changes in the Certificate data
                         </Typography>
-                      </div>
+                            </div>
+                          )}
+                      </Grid>
                     )}
-                  </Grid>
-                )}
-              </Grid>
-            </Paper>
-          )}
+                </Grid>
+              </Paper>
+            )}
         </Grid>
       </Grid>
     );

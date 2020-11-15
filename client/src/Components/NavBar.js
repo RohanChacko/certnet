@@ -139,15 +139,15 @@ class NavBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem component={Link} to={`/profile/${id}`}>
+        {this.props.user !== {} && <MenuItem component={Link} to={`/profile/${id}`}>
           Profile
-        </MenuItem>
+        </MenuItem>}
         <MenuItem component={Link} to="/login">
           Authentication
         </MenuItem>
-        <MenuItem component={Link} to="/display_certificates">
+        {this.props.user !== {} && <MenuItem component={Link} to="/display_certificates">
           View Certificates
-        </MenuItem>
+        </MenuItem>}
         {this.props.user.type === 'Org' && <MenuItem component={Link} to="/generate-certificate">
           Generate Certificate
         </MenuItem>}
