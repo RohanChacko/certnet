@@ -29,8 +29,8 @@ if (process.env.NODE_ENV !== "production") app.use(require("cors")());
 
 // Get User object given user id
 app.get("/user/data/:id", (req, res) => {
-  let studentId = req.params.id;
-  Users.find({'userId': studentId})
+  let id = req.params.id;
+  Users.find({'id': id})
     .then(obj => {
       if (obj === null)
         res.status(400).send({ err: "User data doesn't exist" });
@@ -53,10 +53,10 @@ app.get("/users/data/students", (req, res) => {
 // Generate User
 app.post("/user/generate/:id", (req, res) => {
   const { name, givenName, familyName, imageUrl, email , type } = req.body;
-  let userId = req.params.id;
+  let id = req.params.id;
 
   const user = new Users({
-    userId,
+    id,
     name,
     givenName,
     familyName,
@@ -92,10 +92,10 @@ app.get("/certificates/data/:ownerid&:studentid", (req, res) => {
 
   // Build query
   let query = {};
-  if (ownerId !== null){
+  if (ownerId !== "None"){
     query['ownerId'] = ownerId;
   }
-  if (studentId !== null){
+  if (studentId !== "None"){
     query['studentId'] = studentId;
   }
 
