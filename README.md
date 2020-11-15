@@ -1,7 +1,20 @@
 # CertNet
 ## DECENTRALIZED SYSTEM FOR CERTIFICATE VERIFICATION
 
-## Steps to set up local development environment
+#### Contributors
+* [Sumaid Syed](https://github.com/Sumaid)
+* [Rohan Chacko](https://github.com/RohanChacko)
+* [Meher Shashwat Nigam](https://github.com/ShashwatNigam99)
+* [Adhithya Arun](https://github.com/adhithyaarun)
+* [AadilMehdi Sanchawala](https://github.com/aadilmehdis)
+
+## Use case diagram
+![usecase](./documents/usecase.png)
+
+
+## Setup
+
+### Steps to set up local development environment
 
 You can either set up local development environment or deploy on a test network like Rinkeby.
 
@@ -43,7 +56,7 @@ Install MongoDB
 3. We need to install CLI version of Ganache.
 
    ```bash
-   npm install -g ganache-cli
+   npm install ganache-cli
    ```
 
    > Ganache provides us our personal local blockchain network which we can use to develop our blockchain application. It also gives temporary test accounts with fake ethereum which we can use to run our apps. We need to start the RPC server before running our application.
@@ -61,6 +74,9 @@ Install MongoDB
    ```
 
 > The above 2 steps need to be run everytime you are running the project.
+
+
+## Tests
 
 ### Running tests
 

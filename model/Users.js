@@ -2,10 +2,12 @@ const { mongoose } = require("./mongoose");
 
 const UserSchema = new mongoose.Schema({
 
-  userId: {
+  id: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique : true,
+    dropDups: true
   },
   name: {
     type: String,
