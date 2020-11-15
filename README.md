@@ -2,11 +2,11 @@
 ## DECENTRALIZED SYSTEM FOR CERTIFICATE VERIFICATION
 
 #### Contributors
-* [Sumaid Syed](github.com/Sumaid)
-* [Rohan Chacko](github.com/RohanChacko)
-* [Meher Shashwat Nigam](github.com/ShashwatNigam99)
-* [Adhithya Arun](github.com/adhithyaarun)
-* [AadilMehdi Sanchawala](github.com/aadilmehdis)
+* [Sumaid Syed](https://github.com/Sumaid)
+* [Rohan Chacko](https://github.com/RohanChacko)
+* [Meher Shashwat Nigam](https://github.com/ShashwatNigam99)
+* [Adhithya Arun](https://github.com/adhithyaarun)
+* [AadilMehdi Sanchawala](https://github.com/aadilmehdis)
 
 ## Use case diagram
 ![usecase](./documents/usecase.png)
