@@ -163,13 +163,13 @@ class Dashboard extends React.Component {
               <Paper className={classes.rightpaper}>
                 <div>
                   <Typography variant="h5" color="inherit" noWrap>
-                    <PersonIcon /><a href={`/profile/${studentId}`}>{candidateName}</a>
+                    <PersonIcon /><a href={`/profile/${studentId}`} target="_blank">{candidateName}</a>
                   </Typography>
                   <Typography variant="h6" color="inherit" noWrap>
                     {courseName}
                   </Typography>
                   <Typography variant="h6" color="inherit" noWrap>
-                    <AccountBalanceIcon /><a href={`/profile/${ownerId}`}>{orgName}</a>
+                    <AccountBalanceIcon /><a href={`/profile/${ownerId}`} target="_blank">{orgName}</a>
                   </Typography>
                   <Typography variant="caption" color="inherit" noWrap>
                     Assigned on: {assignDate}
