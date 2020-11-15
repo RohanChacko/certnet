@@ -96,12 +96,11 @@ function Login(props) {
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
     getUser(res.profileObj.googleId).then(data => {
-      console.log('Retrieveved data is ', data);
-      if (data.id !== undefined) {
+      if (data.length !== 0) {
         toggleStatus(true);
         setOpen(false);
-        updateUser(data);
-        props.login(data);
+        updateUser(data[0]);
+        props.login(data[0]);
       } else {
         updateUser(res.profileObj);
         setOpen(true);

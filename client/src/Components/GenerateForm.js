@@ -126,8 +126,8 @@ class GenerateForm extends React.Component {
   componentDidMount() {
     getStudents().then(data => {
       console.log('Students recieved is ', data);
-      this.setState({students: data})
-    });  
+      this.setState({ students: data });
+    });
   }
 
   handleChange = name => event => {
@@ -153,8 +153,8 @@ class GenerateForm extends React.Component {
     let candidateName = `${student.givenName} ${student.familyName}`;
     let assignDate = new Date(assignedOn).getTime();
     generateCertificate(
-      this.props.user.ownerid,
-      this.props.user.studentid,
+      this.props.user.id,
+      this.state.student.id,
       candidateName,
       coursename,
       organization,

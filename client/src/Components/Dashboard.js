@@ -73,6 +73,8 @@ class Dashboard extends React.Component {
     pageLoad: true,
     info: {
       candidateName: "",
+      ownerID: "",
+      studentID: "",
       orgName: "",
       courseName: "",
       assignDate: null,
@@ -92,10 +94,11 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const certificateId = this.props.match.params.id;
     getCertificate(certificateId).then(data => {
+      console.log('Gotten certificate is ', data);
       const {
         candidateName,
-        ownerId,
-        studentId,
+        ownerID,
+        studentID,
         orgName,
         courseName,
         assignDate,
@@ -107,8 +110,8 @@ class Dashboard extends React.Component {
         temp.pageLoad = false;
         temp.info = {
           candidateName,
-          ownerId,
-          studentId,
+          ownerID,
+          studentID,
           orgName,
           courseName,
           assignDate: new Date(assignDate).toString().slice(4, 15),
@@ -131,9 +134,9 @@ class Dashboard extends React.Component {
     } = this.state;
     const {
       candidateName,
-      ownerId,
-      studentId,
-      orgName,
+      ownerID,
+      studentID,
+    orgName,
       courseName,
       assignDate,
       expirationDate
@@ -163,13 +166,13 @@ class Dashboard extends React.Component {
               <Paper className={classes.rightpaper}>
                 <div>
                   <Typography variant="h5" color="inherit" noWrap>
-                    <PersonIcon /><a href={`/profile/${studentId}`} target="_blank">{candidateName}</a>
+                    <PersonIcon /><a href={`/profile/${studentID}`} target="_blank">{candidateName}</a>
                   </Typography>
                   <Typography variant="h6" color="inherit" noWrap>
                     {courseName}
                   </Typography>
                   <Typography variant="h6" color="inherit" noWrap>
-                    <AccountBalanceIcon /><a href={`/profile/${ownerId}`} target="_blank">{orgName}</a>
+                    <AccountBalanceIcon /><a href={`/profile/${ownerID}`} target="_blank">{orgName}</a>
                   </Typography>
                   <Typography variant="caption" color="inherit" noWrap>
                     Assigned on: {assignDate}

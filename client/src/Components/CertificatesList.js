@@ -89,7 +89,10 @@ class CertificatesList extends React.Component {
 
   componentDidMount() {
     const ownerId = this.props.user.id;
-    console.log('User in view certificates is ', this.props);
+    console.log('User in view certificates is ', this.props.user);
+    if (this.props.user.id === undefined){
+      return;
+    }
     this.setState({ user: this.props.user });
     if (this.props.user.type == 'Org') {
       getCertificates(ownerId, "None").then(data => {
@@ -99,14 +102,17 @@ class CertificatesList extends React.Component {
     } else {
       getCertificates("None", ownerId).then(data => {
         this.setState({ data: data });
-        console.log('owner id is', ownerId);
-        console.log('DATA recieved is ', data);
+        console.log('STUDENT : owner id is', ownerId);
+        console.log('STUDENT : DATA recieved is ', data);
       });
     }
   }
 
   static getDerivedStateFromProps(props, state) {
     if (state.user !== props.user) {
+      if (props.user === {}){
+        return;
+      }  
       const ownerId = props.user.id;
       if (props.user.type == 'Org'){
         getCertificates(ownerId, null).then(data => {

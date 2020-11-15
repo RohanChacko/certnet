@@ -62,12 +62,15 @@ class Profile extends React.Component {
     componentDidMount() {
         const { match: { params } } = this.props;
         const userId = params.userId;
+        if (userId === undefined || userId === "undefined"){
+            return;
+        }
         var user = {};
         getUser(userId).then(data => {
+            console.log('Data from ID is ', data, userId);
             user = data[0];
-            user.id = user.userId;
-            this.setState({ user: user });
             console.log('User recieved from ID is ', user);
+            this.setState({ user: user });
         });
     }
 
@@ -76,6 +79,7 @@ class Profile extends React.Component {
         const user = this.state.user;
         return (
             <div >
+                {this.state.user !== {} && <div>
                 <br />
                 <Typography variant="h4" color="inherit" className={classes.head} noWrap>Profile Page</Typography>
                 <br />
@@ -138,9 +142,7 @@ class Profile extends React.Component {
                         </Paper>
                     </Grid>
                 </Grid>
-
-
-
+                </div>}
             </div>
         );
     }

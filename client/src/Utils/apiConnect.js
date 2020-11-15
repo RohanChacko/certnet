@@ -23,7 +23,7 @@ export const getUser = studentId =>
       console.log(err);
     });
 
-export const getStudents =
+export const getStudents = () =>
   fetch(`${host}/users/data/students`, getHeader)
     .then(res => res.json())
     .catch(err => {
