@@ -16,6 +16,43 @@ let host = "";
 
 host = "http://localhost:3001";
 
+export const getUser = studentId =>
+  fetch(`${host}/user/data/${studentId}`, getHeader)
+    .then(res => res.json())
+    .catch(err => {
+      console.log(err);
+    });
+
+export const getStudents =
+  fetch(`${host}/users/data/students`, getHeader)
+    .then(res => res.json())
+    .catch(err => {
+      console.log(err);
+    });
+
+export const generateUser = (
+  name,
+  givenName,
+  familyName,
+  imageUrl,
+  email,
+  type
+) =>
+  fetch(`${host}/user/generate`, {
+    ...postHeader,
+    body: JSON.stringify({
+      name,
+      givenName,
+      familyName,
+      imageUrl,
+      email,
+      type
+    })
+  })
+    .then(res => res.json())
+    .catch(err => {
+      console.log(err);
+    });
 
 export const getCertificate = certificateId =>
   fetch(`${host}/certificate/data/${certificateId}`, getHeader)
@@ -24,8 +61,8 @@ export const getCertificate = certificateId =>
       console.log(err);
     });
 
-export const getCertificates = ownerId =>
-  fetch(`${host}/certificates/data/${ownerId}`, getHeader)
+export const getCertificates = (ownerId, studentId) =>
+  fetch(`${host}/certificates/data/${ownerId}&${studentId}`, getHeader)
     .then(res => res.json())
     .catch(err => {
       console.log(err);
@@ -43,6 +80,7 @@ export const verifyCertificate = certificateId =>
 
 export const generateCertificate = (
   ownerId,
+  studentId,
   candidateName,
   courseName,
   orgName,
@@ -50,7 +88,7 @@ export const generateCertificate = (
   duration,
   emailId
 ) =>
-  fetch(`${host}/certificate/generate/${ownerId}`, {
+  fetch(`${host}/certificate/generate/${ownerId}&${studentId}`, {
     ...postHeader,
     body: JSON.stringify({
       candidateName,
