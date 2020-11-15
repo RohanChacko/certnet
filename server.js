@@ -87,16 +87,16 @@ app.get("/certificate/data/:id", (req, res) => {
 
 // Get all Certificates based on owner(org) id
 app.get("/certificates/data/:ownerid&:studentid", (req, res) => {
-  let ownerId = req.params.id;
-  let studentId = req.params.id;
+  let ownerId = req.params.ownerid;
+  let studentId = req.params.studentid;
 
   // Build query
   let query = {};
   if (ownerId !== "None"){
-    query['ownerId'] = ownerId;
+    query['ownerID'] = ownerId;
   }
   if (studentId !== "None"){
-    query['studentId'] = studentId;
+    query['studentID'] = studentId;
   }
 
   Certificates.find(query)
