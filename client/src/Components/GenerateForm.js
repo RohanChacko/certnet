@@ -154,8 +154,8 @@ class GenerateForm extends React.Component {
     let candidateName = `${student.givenName} ${student.familyName}`;
     let assignDate = new Date(assignedOn).getTime();
     generateCertificate(
-      this.props.user.id,
-      student.id,
+      this.props.user.ownerid,
+      this.props.user.studentid,
       candidateName,
       coursename,
       organization,

@@ -7,6 +7,7 @@ const path = require("path");
 
 if (process.env.NODE_ENV === undefined) process.env.NODE_ENV = "development";
 const Certificates = require("./model/Certificates");
+const Users = require("./model/Users");
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +27,51 @@ app.use((req, res, next) => {
 // CORS
 if (process.env.NODE_ENV !== "production") app.use(require("cors")());
 
-// Get Certificate based on certificate id
+// Get User object given user id
+app.get("/user/data/:id", (req, res) => {
+  let studentId = req.params.id;
+  Users.findById(studentId)
+    .then(obj => {
+      if (obj === null)
+        res.status(400).send({ err: "User data doesn't exist" });
+      else {console.log(obj);res.send(obj);}
+    })
+    .catch(err => res.status(400).send({ err }));
+});
+
+// Get all Users of type `Student`
+app.get("/users/data/students", (req, res) => {
+  Users.find({'type':'Student'})
+    .then(obj => {
+      if (obj === null)
+        res.status(400).send({ err: "Users data doesn't exist" });
+      else {console.log(obj);res.send(obj);}
+    })
+    .catch(err => res.status(400).send({ err }));
+});
+
+// Generate User
+app.post("/user/generate", (req, res) => {
+  const { name, givenName, familyName, imageUrl, email , type } = req.body;
+
+  const user = new Users({
+    name,
+    givenName,
+    familyName,
+    imageUrl,
+    email,
+    type
+  });
+
+  user.save()
+    .then(user => console.log('The user has been registered.'))
+    .catch(err => {
+      log.Error(err);
+      res.status(400).send();
+    });
+});
+
+// Get Certificate given certificate id
 app.get("/certificate/data/:id", (req, res) => {
   let certificateId = req.params.id;
   Certificates.findById(certificateId)
@@ -38,14 +83,25 @@ app.get("/certificate/data/:id", (req, res) => {
     .catch(err => res.status(400).send({ err }));
 });
 
-// Get all Certificates based on user id
-app.get("/certificates/data/:id", (req, res) => {
+// Get all Certificates based on owner(org) id
+app.get("/certificates/data/:ownerid&:studentid", (req, res) => {
   let ownerId = req.params.id;
-  Certificates.find({'ownerID':ownerId})
+  let studentId = req.params.id;
+
+  // Build query
+  let query = {};
+  if (ownerId !== null){
+    query['ownerId'] = ownerId;
+  }
+  if (studentId !== null){
+    query['studentId'] = studentId;
+  }
+
+  Certificates.find(query)
     .then(obj => {
       if (obj === null)
         res.status(400).send({ err: "Certificate data doesn't exist" });
-      else {console.log(obj);res.send(obj);}
+      else {res.send(obj);}
     })
     .catch(err => res.status(400).send({ err }));
 });
@@ -65,12 +121,13 @@ app.get("/certificate/verify/:id", (req, res) => {
     );
 });
 
-app.post("/certificate/generate/:id", (req, res) => {
+// Generate certificate from `ownerid`(org) to `studentid`
+app.post("/certificate/generate/:ownerid&:studentid", (req, res) => {
   const { candidateName, orgName, courseName, assignDate, duration } = req.body;
 
-  // Take from URL GET variable
-  const ownerID = req.params.id;
-  console.log(ownerID);
+  // Parse GET parameters
+  const ownerID = req.params.ownerid;
+  const studentID = req.params.studentid;
   const given = new Date(assignDate);
 
   let expirationDate = given.setFullYear(given.getFullYear() + duration);
@@ -79,6 +136,7 @@ app.post("/certificate/generate/:id", (req, res) => {
 
   const certificate = new Certificates({
     ownerID,
+    studentID,
     candidateName,
     orgName,
     courseName,
@@ -111,13 +169,13 @@ app.post("/certificate/generate/:id", (req, res) => {
     });
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 
 const port = process.env.PORT || 3000;
 
