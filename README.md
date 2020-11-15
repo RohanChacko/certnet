@@ -1,10 +1,9 @@
-# Educational History Using Blockchain : CertNet
-
-![usecase](./documents/usecase.png)
+# CertNet
+## DECENTRALIZED SYSTEM FOR CERTIFICATE VERIFICATION
 
 ## Steps to set up local development environment
 
-You can either set up local development environment or deploy on a test network like Rinkeby. 
+You can either set up local development environment or deploy on a test network like Rinkeby.
 
 ### Setting local database
 
@@ -105,7 +104,7 @@ The contract can be deployed in any test networks. We are using Rinkeby test net
 
 1. You will get an endpoint like this `https://rinkeby.infura.io/yourapikey`.
 
-1. Create a `.env` file in root directory and paste the previously genrated mnemonic and the endpoint URL in that. 
+1. Create a `.env` file in root directory and paste the previously genrated mnemonic and the endpoint URL in that.
 
 1. Now you can deploy the smart contract using a single command:
 
