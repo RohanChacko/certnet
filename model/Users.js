@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    index: true,
     unique : true,
     dropDups: true
   },
@@ -54,5 +55,6 @@ UserSchema.methods.toJSON = function() {
 };
 
 const Users = mongoose.model("users", UserSchema);
+Users.createIndexes();
 
 module.exports = Users;

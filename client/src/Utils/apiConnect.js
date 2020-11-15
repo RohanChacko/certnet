@@ -31,7 +31,7 @@ export const getStudents =
     });
 
 export const generateUser = (
-  userId,
+  id,
   name,
   givenName,
   familyName,
@@ -39,7 +39,7 @@ export const generateUser = (
   email,
   type
 ) =>
-  fetch(`${host}/user/generate/${userId}`, {
+  fetch(`${host}/user/generate/${id}`, {
     ...postHeader,
     body: JSON.stringify({
       name,
