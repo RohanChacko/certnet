@@ -1,5 +1,5 @@
 # CertNet
-## DECENTRALIZED SYSTEM FOR CERTIFICATE VERIFICATION
+## Decentralized System for Certificate Verification
 
 #### Contributors
 * [Sumaid Syed](https://github.com/Sumaid)
