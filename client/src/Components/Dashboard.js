@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
 
   verification = () => {
     this.setState({ loading: true });
-    verifyCertificate(this.state.certificateId).then(success => {
+    verifyCertificate(this.props.match.params.id).then(success => {
       this.setState({ authorized: success, verified: true, loading: false });
     });
   };
