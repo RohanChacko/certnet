@@ -105,6 +105,21 @@ class Dashboard extends React.Component {
         assignDate,
         expirationDate
       } = data;
+      if ( ownerID === undefined ){
+        const temp = data;
+        temp.certificateId = certificateId;
+        temp.pageLoad = false;
+        temp.info = {
+          candidateName,
+          ownerID,
+          studentID,
+          orgName,
+          courseName,
+          assignDate: new Date(assignDate).toString().slice(4, 15),
+          expirationDate: new Date(expirationDate).toString().slice(4, 15)
+        };
+        return temp;
+      }
       getUser(ownerID).then(ownerData => {
         const url = ownerData[0].imageUrl;
         console.log('OWNER url is ', url);
