@@ -76,20 +76,6 @@ Install MongoDB
 > The above 2 steps need to be run everytime you are running the project.
 
 
-## Tests
-
-### Running tests
-
-```bash
-npm run test
-```
-
-### Now we can start the server
-
-```bash
-npm start
-```
-
 ### Running Client Application
 
 1. Go to ./client/
@@ -133,6 +119,18 @@ The contract can be deployed in any test networks. We are using Rinkeby test net
 ## Testing app
 
 To test the app run the command `truffle test`. RPC server should be running to run the tests.
+
+### Running tests
+
+```bash
+npm run test
+```
+
+### Now we can start the server
+
+```bash
+npm start
+```
 
 ## Useful reads
 
