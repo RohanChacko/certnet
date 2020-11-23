@@ -1,5 +1,5 @@
 # CertNet
-## Decentralized System for Certificate Verification
+## Decentralized System for Certificate Verification using Blockchain
 
 #### Contributors
 * [Sumaid Syed](https://github.com/Sumaid)
@@ -8,139 +8,58 @@
 * [Adhithya Arun](https://github.com/adhithyaarun)
 * [AadilMehdi Sanchawala](https://github.com/aadilmehdis)
 
-## Use case diagram
-![usecase](./documents/usecase.png)
+Please view [INSTALL.md](https://github.com/Sumaid/certnet/blob/main/INSTALL.md) for installation and setup instructions.
 
+### Running the application
 
-## Setup
+#### Starting the blockchain network
 
-### Steps to set up local development environment
-
-You can either set up local development environment or deploy on a test network like Rinkeby.
-
-### Setting local database
-
-Install [MongoDB](https://docs.mongodb.com/manual/installation/)
-
-> Run MongoDB server as a background process
-
-1. Open mongo in terminal using command `mongo`
-
-2. Then change the db using command
-
-   ```bash
-   use certification
-   ```
-
-3. Then set DB user and password with the following command
-
-   ```javascript
-   db.createUser({
-     user: "newuser",
-     pwd: "1234",
-     roles: [{ role: "dbOwner", db: "certification" }]
-   });
-   ```
-
-4. Replace the username and password in  `.env` file with what you set above.
-
-### Setting local blockchain
-
-1. Install node v8.11.2 (You can use nvm to manage different node versions)
-2. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-3. We need to install CLI version of Ganache.
-
-   ```bash
-   npm install ganache-cli
-   ```
-
-   > Ganache provides us our personal local blockchain network which we can use to develop our blockchain application. It also gives temporary test accounts with fake ethereum which we can use to run our apps. We need to start the RPC server before running our application.
-
-4. To start the RPC server run the command
+* To start the RPC server
 
    ```bash
    npm run ganache &
    ```
 
-5. Deploy the smart contract to the local blockchain.
+* Deploy the smart contract to the blockchain network
 
    ```bash
    npm run contract-deploy
    ```
 
-> The above 2 steps need to be run everytime you are running the project.
+> Additionally, the other two steps can be performed using the Ganache GUI for better visualization. The steps are mostly straightforward. Note, the Gas Price should be set to 20 wei (default is a very large value).
 
 
-### Running Client Application
+#### Starting the web application
 
-1. Go to ./client/
-2. Install prerequisites
-
-   ```bash
-   npm install
-   ```
-
-3. Run the react app
-
-   ```bash
-   npm start
-   ```
-
-4. App should be running on http://localhost:3000/
-5. Go to authentication section from navigation, log in with google account.
-6. You can log in as org or student, first log in as student with some google account.
-7. Log in as org with different google account, you should be able to see list of certified students
-   in generate certificate page.
-8. Generate certificate page is only available for orgs. For org, view list of certificates will show list of all the certificates org has issued, for students, it will show list of all the certificates assigned to the student.
-9. For both org and student, profile page will show details like name, email id, pic, etc.
-10. Both profile page & certificate display page are public URLs, anyone with the URL should be able to access them without being part of the network.
-
-## Ganache UI
-
-1. Download [Ganache](https://www.trufflesuite.com/ganache)
-2. Deploy contracts, now when a certificate is generated, you should be able to see blocks and transactions in the Ganache application.
-
-## Deploying Smart Contract on test network (Not required for development)
-
-The contract can be deployed in any test networks. We are using Rinkeby test network with help of truffle.
-
-1. First of all we need to have a metamask account. When we create an account in metamask a _mnemonic_ is given to us. [You can read how to get a mnemonic here.](https://support.dex.top/hc/en-us/articles/360004125614-How-to-Create-Mnemonic-Phrase-with-MetaMask-)
-
-1. After that create a project in [Infura](https://infura.io). This will help us to use rinkeby network through infura.
-
-1. You will get an endpoint like this `https://rinkeby.infura.io/yourapikey`.
-
-1. Create a `.env` file in root directory and paste the previously genrated mnemonic and the endpoint URL in that.
-
-1. Now you can deploy the smart contract using a single command:
-
-   ```BASH
-   npm run deploy
-   ```
-
-1. You will get a contract address of newly generated contract. Save this for further uses.
-
-## Testing app
-
-To test the app run the command `truffle test`. RPC server should be running to run the tests.
-
-### Running tests
-
+* Backend server
 ```bash
-npm run test
-```
-
-### Now we can start the server
-
-```bash
+cd certnet/
 npm start
 ```
 
-## Useful reads
+* React frontend
+```bash
+ cd client/
+ npm start
+ ```
 
-- [Some instructions and commands for debugging in Truffle Console](./instructions/COMMANDS.md)
+### Notes
+
+* App runs on `http://localhost:3000/` by default
+
+* Go to `Authentication` tab from navigation (top right)
+
+* Log in with Google account. For demonstration purposes, you can choose a role between **Org** and **Student** when you register.
+
+* If an Org role was chosen, you can navigate to the `Generate Certificate` tab where you can issue certificates to registered students.
+
+* For an Org, `View Certificates` shows a list of certificates issued by the organization. For a Student, `View Certificates` shows all certificates issued to the student.
+
+* The `Profile` tab shows details like name, email id, profile picture for both roles.
+
+* Both `Profile` & `View Certificates` have public URLs; anyone with the URL should be able to access them without being registered users on the network.
+
+* More documentation provided in [docs](https://github.com/Sumaid/certnet/tree/main/docs)
+
+### Use case diagram
+![usecase](./documents/usecase.png)
