@@ -62,4 +62,4 @@ npm start
 * More documentation provided in [docs](https://github.com/Sumaid/certnet/tree/main/docs)
 
 ### Use case diagram
-![usecase](./documents/usecase.png)
+![usecase](https://github.com/Sumaid/certnet/tree/main/docs/usecase.png)
