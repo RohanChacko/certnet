@@ -1,6 +1,8 @@
 # CertNet
 ## Decentralized System for Certificate Verification using Blockchain
 
+![thumbnail](./docs/thumbnail.png)
+
 #### Contributors
 * [Sumaid Syed](https://github.com/Sumaid)
 * [Rohan Chacko](https://github.com/RohanChacko)
