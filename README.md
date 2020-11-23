@@ -20,7 +20,7 @@ You can either set up local development environment or deploy on a test network 
 
 ### Setting local database
 
-Install MongoDB
+Install [MongoDB](https://docs.mongodb.com/manual/installation/)
 
 > Run MongoDB server as a background process
 
@@ -92,9 +92,18 @@ Install MongoDB
    ```
 
 4. App should be running on http://localhost:3000/
-5. Go to http://localhost:3000/generate-certificate to generate a new certificate
-6. Go to http://localhost:3000/display/certificate/:id to display the certificate corresponding to id
+5. Go to authentication section from navigation, log in with google account.
+6. You can log in as org or student, first log in as student with some google account.
+7. Log in as org with different google account, you should be able to see list of certified students
+   in generate certificate page.
+8. Generate certificate page is only available for orgs. For org, view list of certificates will show list of all the certificates org has issued, for students, it will show list of all the certificates assigned to the student.
+9. For both org and student, profile page will show details like name, email id, pic, etc.
+10. Both profile page & certificate display page are public URLs, anyone with the URL should be able to access them without being part of the network.
 
+## Ganache UI
+
+1. Download [Ganache](https://www.trufflesuite.com/ganache)
+2. Deploy contracts, now when a certificate is generated, you should be able to see blocks and transactions in the Ganache application.
 
 ## Deploying Smart Contract on test network (Not required for development)
 
